@@ -1,11 +1,10 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { AnimationBase } from './animation-base';
 
 @Directive({
   selector: '[horDailyAnimation]'
 })
-export class DailyAnimationDirective implements OnInit {
-
-  private static readonly SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+export class DailyAnimationDirective extends AnimationBase implements OnInit {
 
   @Input()
   public animationId: string;
@@ -14,24 +13,31 @@ export class DailyAnimationDirective implements OnInit {
   public animationAttribute: string;
 
   @Input()
-  public dailyOffset: string;
+  public dayTime: string;
 
   @Input()
   public dailyValues: string;
 
+  @Input()
+  public duration: string;
+
   constructor(
     private readonly element: ElementRef<SVGAElement>,
     private readonly renderer: Renderer2) {
+    super();
   }
 
   public ngOnInit(): void {
     // Create the daily animation.
-    const dailyAnimation: SVGAnimateElement = this.renderer.createElement('animate', DailyAnimationDirective.SVG_NAMESPACE);
+    const dailyAnimation: SVGAnimateElement = this.renderer.createElement('animate', AnimationBase.SVG_NAMESPACE);
     dailyAnimation.id = this.animationId + 'daily';
-    this.renderer.setAttribute(dailyAnimation, 'begin', `${this.dailyOffset}; ${dailyAnimation.id}.end + 28s`);
+    const durationInRealSeconds = this.convertToRealSeconds(this.duration);
+    const delayInRealSeconds = AnimationBase.SUN_CYLCE_IN_REAL_SECONDS - durationInRealSeconds;
+    this.renderer.setAttribute(
+      dailyAnimation, 'begin', `${this.convertToRealSeconds(this.dayTime)}s; ${dailyAnimation.id}.end + ${delayInRealSeconds}s`);
     this.renderer.setAttribute(dailyAnimation, 'values', this.dailyValues);
     this.renderer.setAttribute(dailyAnimation, 'attributeName', this.animationAttribute);
-    this.renderer.setAttribute(dailyAnimation, 'dur', '12s');
+    this.renderer.setAttribute(dailyAnimation, 'dur', `${durationInRealSeconds}s`);
     this.renderer.setAttribute(dailyAnimation, 'attributeType', 'XML');
 
     // Append the animation.

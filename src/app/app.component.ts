@@ -4,6 +4,7 @@ import { ContourLineService } from './services/contour-line.service';
 import { ContourLineRequest } from './models/contour-line-request';
 import { ContourLinePosition } from './models/contour-line-position.enum';
 import { ContourLineResponse } from './models/contour-line-response';
+import { AnimationBase } from './directives/animation-base';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,29 @@ export class AppComponent implements OnInit {
 
   private contourLineSubscribtion: Subscription;
 
-  public readonly height = 400;
-  public readonly width = 800;
+  public readonly width = 1920;
+  public readonly height = 1080;
+  public readonly speed = 0.025;
+  public readonly contourLineSpeedOffset = 5;
   public readonly diagonal = Math.hypot(this.width, this.height);
-  public readonly contourLineAmplitude = 50;
+  public readonly contourLineAmplitude = this.height * 0.125;
   public readonly contourLineBodyLength = this.width * 3;
+  public readonly sunCycleDuration = `${AnimationBase.SUN_CYLCE_IN_REAL_SECONDS}s`;
+  public readonly contourLineHeightBack = this.height * 0.25;
+  public readonly contourLineGap = this.height * 0.15;
+  public readonly contourLineHeightMiddle = this.contourLineHeightBack + this.contourLineGap;
+  public readonly contourLineHeightFront = this.contourLineHeightMiddle + this.contourLineGap;
+  public readonly waterHeight = this.height - this.contourLineGap;
+  public readonly contourLineCycleDurationFront = `${this.width * this.speed}s`;
+  public readonly contourLineCycleDurationMiddle = `${this.width * this.speed * this.contourLineSpeedOffset}s`;
+  public readonly contourLineCycleDurationBack = `${this.width * this.speed * this.contourLineSpeedOffset * this.contourLineSpeedOffset}s`;
+  public readonly sunRadius = this.height * 0.025;
+  public readonly moonRadius = this.height * 0.0225;
+  public readonly starRadius = this.height * 0.00125;
+  public readonly faintStars1PatternSize = this.height * 0.15;
+  public readonly faintStars2PatternSize = this.height * 0.275;
+  public readonly brightStars1PatternSize = this.height * 0.25;
+  public readonly brightStars2PatternSize = this.height * 0.35;
 
   public contourLinePointsBack: string;
   public contourLinePointsMiddle: string;
@@ -39,7 +58,7 @@ export class AppComponent implements OnInit {
         ContourLinePosition.Back,
         1,
         6,
-        0.0125,
+        0.006,
         this.contourLineBodyLength,
         this.width,
         this.contourLineAmplitude,
@@ -49,7 +68,7 @@ export class AppComponent implements OnInit {
         ContourLinePosition.Middle,
         2,
         3,
-        0.00625,
+        0.004,
         this.contourLineBodyLength,
         this.width,
         this.contourLineAmplitude,
@@ -59,7 +78,7 @@ export class AppComponent implements OnInit {
         ContourLinePosition.Front,
         3,
         2,
-        0.003125,
+        0.002,
         this.contourLineBodyLength,
         this.width,
         this.contourLineAmplitude,
