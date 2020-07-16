@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   public readonly height = 400;
   public readonly width = 800;
+  public readonly diagonal = Math.hypot(this.width, this.height);
   public readonly contourLineAmplitude = 50;
   public readonly contourLineBodyLength = this.width * 3;
 
