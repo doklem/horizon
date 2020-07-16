@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
       new ContourLineRequest(
         ContourLinePosition.Back,
         1,
+        6,
         0.0125,
         this.contourLineBodyLength,
         this.width,
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
       new ContourLineRequest(
         ContourLinePosition.Middle,
         2,
+        3,
         0.00625,
         this.contourLineBodyLength,
         this.width,
@@ -56,6 +58,7 @@ export class AppComponent implements OnInit {
       new ContourLineRequest(
         ContourLinePosition.Front,
         3,
+        2,
         0.003125,
         this.contourLineBodyLength,
         this.width,
