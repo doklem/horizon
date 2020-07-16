@@ -1,8 +1,8 @@
 /// <reference lib="webworker" />
 
-import { FrameWorkerLogic } from './frame-worker-logic';
+import { ContourLineWorkerLogic } from './contour-line-worker-logic';
 
-const logic = new FrameWorkerLogic();
+const logic = new ContourLineWorkerLogic();
 
 addEventListener('message', ({ data }) => {
   postMessage(logic.generateContourLine(data));

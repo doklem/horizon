@@ -1,4 +1,4 @@
-<svg width="1900" height="945" [attr.viewBox]="'0 0 ' + this.width + ' ' + this.height" preserveAspectRatio="none">
+<svg [attr.viewBox]="'0 0 ' + this.width + ' ' + this.height" preserveAspectRatio="none">
   <defs>
     <pattern id="faint-stars-1" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
       <circle fill="#fff" cx="01" cy="01" r="0.5" />
@@ -17,37 +17,64 @@
       <circle fill="#fff" cx="83" cy="75" r="0.5" />
     </pattern>
   </defs>
-  <rect [attr.width]="this.width" [attr.height]="this.height" [attr.fill]="this.skyColorDay">
-    <animate attributeType="XML" attributeName="fill" [attr.from]="this.skyColorDay" [attr.to]="this.skyColorNight" id="skyDusk" begin="0s;skyDawn.end + 5s" dur="3s" fill="freeze"/>
-    <animate attributeType="XML" attributeName="fill" [attr.from]="this.skyColorNight" [attr.to]="this.skyColorDay" id="skyDawn" begin="skyDusk.end + 5s" dur="3s" fill="freeze"/>
+  <rect [attr.width]="this.width" [attr.height]="this.height" fill="#87ceeb">
+    <animate attributeType="XML" attributeName="fill" values="#87ceeb;#ffe373;#fd5e53;#313251" id="skyDusk"
+      begin="0s; skyDawn.end + 16s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="fill" values="#313251;#87ceeb" id="skyDawn" begin="skyDusk.end + 16s"
+      dur="4s" fill="freeze" />
   </rect>
-  <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#faint-stars-1)">
-    <animate attributeType="XML" attributeName="opacity" from="0" to="1" id="faintStars1Dusk" begin="0s;faintStars1Dawn.end + 5s" dur="3s" fill="freeze"/>
-    <animate attributeType="XML" attributeName="opacity" from="1" to="0" id="faintStars1Dawn" begin="faintStars1Dusk.end + 5s" dur="3s" fill="freeze"/>
+  <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#faint-stars-1)" opacity="0">
+    <animate attributeType="XML" attributeName="opacity" values="0;0.4" id="faintStars1Dusk"
+      begin="4s; faintStars1Dawn.end + 22s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="opacity" values="0.4;0" id="faintStars1Dawn"
+      begin="faintStars1Dusk.end + 10s" dur="4s" fill="freeze" />
   </rect>
-  <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#faint-stars-2)">
-    <animate attributeType="XML" attributeName="opacity" from="0" to="1" id="faintStars2Dusk" begin="0s;faintStars2Dawn.end + 5s" dur="3s" fill="freeze"/>
-    <animate attributeType="XML" attributeName="opacity" from="1" to="0" id="faintStars2Dawn" begin="faintStars2Dusk.end + 5s" dur="3s" fill="freeze"/>
+  <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#faint-stars-2)" opacity="0">
+    <animate attributeType="XML" attributeName="opacity" values="0;0.5" id="faintStars2Dusk"
+      begin="4s; faintStars2Dawn.end + 22s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="opacity" values="0.5;0" id="faintStars2Dawn"
+      begin="faintStars2Dusk.end + 10s" dur="4s" fill="freeze" />
   </rect>
   <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#bright-stars-1)" opacity="0">
-    <animate attributeType="XML" attributeName="opacity" from="0" to="1" id="brightStars1Dusk" begin="0s;brightStars1Dawn.end + 5s" dur="3s" fill="freeze"/>
-    <animate attributeType="XML" attributeName="opacity" from="1" to="0" id="brightStars1Dawn" begin="brightStars1Dusk.end + 5s" dur="3s" fill="freeze"/>
+    <animate attributeType="XML" attributeName="opacity" values="0;0.9" id="brightStars1Dusk"
+      begin="4s; brightStars1Dawn.end + 22s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="opacity" values="0.9;0" id="brightStars1Dawn"
+      begin="brightStars1Dusk.end + 10s" dur="4s" fill="freeze" />
   </rect>
   <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#bright-stars-2)" opacity="0">
-    <animate attributeType="XML" attributeName="opacity" from="0" to="1" id="brightStars2Dusk" begin="0s;brightStars2Dawn.end + 5s" dur="3s" fill="freeze"/>
-    <animate attributeType="XML" attributeName="opacity" from="1" to="0" id="brightStars2Dawn" begin="brightStars2Dusk.end + 5s" dur="3s" fill="freeze"/>
+    <animate attributeType="XML" attributeName="opacity" values="0;1" id="brightStars2Dusk"
+      begin="4s; brightStars2Dawn.end + 22s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="opacity" values="1;0" id="brightStars2Dawn"
+      begin="brightStars2Dusk.end + 10s" dur="4s" fill="freeze" />
   </rect>
-  <ng-container *ngFor="let contourLinePoints of this.contourLinePoints; let i = index">
-    <polygon [attr.points]="contourLinePoints">
-      <animate attributeType="XML" attributeName="fill" [attr.from]="this.contourLineColors[i][0]" [attr.to]="this.contourLineColors[i][1]" [attr.id]="'line' + i + 'Dusk'" [attr.begin]="'0s; line' + i + 'Dawn.end + 5s'" dur="3s" fill="freeze"/>
-      <animate attributeType="XML" attributeName="fill" [attr.from]="this.contourLineColors[i][1]" [attr.to]="this.contourLineColors[i][0]" [attr.id]="'line' + i + 'Dawn'" [attr.begin]="'line' + i + 'Dusk.end + 5s'" dur="3s" fill="freeze"/>
-      <animateTransform attributeName="transform" attributeType="XML" type="translate "
-        [attr.from]="'0,' + ((i + 1) * 60)" [attr.to]="'-2000,' + ((i + 1) * 60)" [attr.dur]=" (120 / (i + 1)) + 's'"
-        repeatCount="indefinite" />
-    </polygon>
-  </ng-container>
-  <rect y="290" [attr.width]="this.width" [attr.height]="this.height" [attr.fill]="this.waterColorDay">
-    <animate attributeType="XML" attributeName="fill" [attr.from]="this.waterColorDay" [attr.to]="this.waterColorNight" id="waterDusk" begin="0s;waterDawn.end + 5s" dur="3s" fill="freeze"/>
-    <animate attributeType="XML" attributeName="fill" [attr.from]="this.waterColorNight" [attr.to]="this.waterColorDay" id="waterDawn" begin="waterDusk.end + 5s" dur="3s" fill="freeze"/>
+  <polygon [attr.points]="this.contourLinePointsBack">
+    <animate attributeType="XML" attributeName="fill" values="#78c4cd;#292a4b" id="backLineDusk"
+      begin="0s; backLineDawn.end + 16s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="fill" values="#292a4b;#78c4cd" id="backLineDawn"
+      begin="backLineDusk.end + 16s" dur="4s" fill="freeze" />
+    <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0,60"
+      [attr.to]="[-this.contourLineBodyLength, 60]" dur="720s" repeatCount="indefinite" />
+  </polygon>
+  <polygon [attr.points]="this.contourLinePointsMiddle">
+    <animate attributeType="XML" attributeName="fill" values="#4fa97c;#1e1f42" id="middleLineDusk"
+      begin="0s; middleLineDawn.end + 16s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="fill" values="#1e1f42;#4fa97c" id="middleLineDawn"
+      begin="middleLineDusk.end + 16s" dur="4s" fill="freeze" />
+    <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0,120"
+      [attr.to]="[-this.contourLineBodyLength, 120]" dur="120s" repeatCount="indefinite" />
+  </polygon>
+  <polygon [attr.points]="this.contourLinePointsFront">
+    <animate attributeType="XML" attributeName="fill" values="#319540;#0a0c32" id="frontLineDusk"
+      begin="0s; frontLineDawn.end + 16s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="fill" values="#0a0c32;#319540" id="frontLineDawn"
+      begin="frontLineDusk.end + 16s" dur="4s" fill="freeze" />
+    <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0,180"
+      [attr.to]="[-this.contourLineBodyLength, 180]" dur="20s" repeatCount="indefinite" />
+  </polygon>
+  <rect y="290" [attr.width]="this.width" [attr.height]="this.height" fill="#0077be">
+    <animate attributeType="XML" attributeName="fill" values="#0077be;#080928" id="waterDusk"
+      begin="0s;waterDawn.end + 16s" dur="4s" fill="freeze" />
+    <animate attributeType="XML" attributeName="fill" values="#080928;#0077be" id="waterDawn"
+      begin="waterDusk.end + 16s" dur="4s" fill="freeze" />
   </rect>
 </svg>

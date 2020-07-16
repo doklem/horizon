@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FrameService } from './frame.service';
+import { ContourLineService } from './contour-line.service';
 
-describe('FrameService', () => {
-  let service: FrameService;
+describe('ContourLineService', () => {
+  let service: ContourLineService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FrameService);
+    service = TestBed.inject(ContourLineService);
   });
 
   it('should be created', () => {
