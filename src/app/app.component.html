@@ -17,95 +17,66 @@
       <circle fill="white" cx="83" cy="75" r="0.5" />
     </pattern>
     <radialGradient id="sun-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-      <stop offset="70%" style="stop-color:white;stop-opacity:1">
-        <animate id="sunCoreDusk" attributeName="stop-color" values="white;orange" begin="-6s; sunCoreDusk.end + 28s"
-          dur="12s"></animate>
-      </stop>
-      <stop offset="100%" style="stop-color:white;stop-opacity:0">
-        <animate id="sunEdgeDusk" attributeName="stop-color" values="white;orange" begin="-6s; sunEdgeDusk.end + 28s"
-          dur="12s"></animate>
-      </stop>
+      <stop offset="70%" style="stop-color:white;stop-opacity:1" animationId="sunCoreDusk"
+        animationAttribute="stop-color" dailyOffset="-6s" dailyValues="white;orange" horDailyAnimation />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" animationId="sunEdgeDusk"
+        animationAttribute="stop-color" dailyOffset="-6s" dailyValues="white;orange" horDailyAnimation />
     </radialGradient>
     <radialGradient id="corona-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
       <stop offset="0%" style="stop-color:#ffe373;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#ffe373;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="moon-shadow-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="30%" style="stop-color:#313251;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#313251;stop-opacity:0" />
     </radialGradient>
     <radialGradient id="moon-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
       <stop offset="0%" style="stop-color:#f5f3ce;stop-opacity:0.15" />
       <stop offset="100%" style="stop-color:#f5f3ce;stop-opacity:0" />
     </radialGradient>
     <pattern id="scene" x="0" y="0" [attr.width]="this.width" [attr.height]="this.height" patternUnits="userSpaceOnUse">
-      <rect id="sky" [attr.width]="this.width" [attr.height]="this.height" fill="#87ceeb">
-        <animate id="skyDusk" attributeType="XML" attributeName="fill" values="#87ceeb;#313251"
-          begin="0s; skyDawn.end + 16s" dur="4s" fill="freeze" />
-        <animate id="skyDawn" attributeType="XML" attributeName="fill" values="#313251;#87ceeb"
-          begin="skyDusk.end + 16s" dur="4s" fill="freeze" />
-      </rect>
+      <rect id="sky" [attr.width]="this.width" [attr.height]="this.height" fill="#87ceeb" animationId="sky"
+        animationAttribute="fill" dawnOffset="20s" dawnValue="#87ceeb" duskOffset="0s" duskValue="#313251"
+        horDawnDuskAnimation />
       <g id="stars">
-        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#faint-stars-1)" opacity="0">
-          <animate id="faintStars1Dusk" attributeType="XML" attributeName="opacity" values="0;0.4"
-            begin="4s; faintStars1Dawn.end + 22s" dur="4s" fill="freeze" />
-          <animate id="faintStars1Dawn" attributeType="XML" attributeName="opacity" values="0.4;0"
-            begin="faintStars1Dusk.end + 10s" dur="4s" fill="freeze" />
-        </circle>
-        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#faint-stars-2)" opacity="0">
-          <animate id="faintStars2Dusk" attributeType="XML" attributeName="opacity" values="0;0.5"
-            begin="4s; faintStars2Dawn.end + 22s" dur="4s" fill="freeze" />
-          <animate id="faintStars2Dawn" attributeType="XML" attributeName="opacity" values="0.5;0"
-            begin="faintStars2Dusk.end + 10s" dur="4s" fill="freeze" />
-        </circle>
-        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#bright-stars-1)" opacity="0">
-          <animate id="brightStars1Dusk" attributeType="XML" attributeName="opacity" values="0;0.9"
-            begin="4s; brightStars1Dawn.end + 22s" dur="4s" fill="freeze" />
-          <animate id="brightStars1Dawn" attributeType="XML" attributeName="opacity" values="0.9;0"
-            begin="brightStars1Dusk.end + 10s" dur="4s" fill="freeze" />
-        </circle>
-        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#bright-stars-2)" opacity="0">
-          <animate id="brightStars2Dusk" attributeType="XML" attributeName="opacity" values="0;1"
-            begin="4s; brightStars2Dawn.end + 22s" dur="4s" fill="freeze" />
-          <animate id="brightStars2Dawn" attributeType="XML" attributeName="opacity" values="1;0"
-            begin="brightStars2Dusk.end + 10s" dur="4s" fill="freeze" />
-        </circle>
+        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#faint-stars-1)" opacity="0"
+          animationId="faintStars1" animationAttribute="opacity" dawnOffset="16s" dawnValue="0" duskOffset="2s"
+          duskValue="0.4" horDawnDuskAnimation />
+        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#faint-stars-2)" opacity="0"
+          animationId="faintStars2" animationAttribute="opacity" dawnOffset="16s" dawnValue="0" duskOffset="2s"
+          duskValue="0.5" horDawnDuskAnimation />
+        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#bright-stars-1)" opacity="0"
+          animationId="brightStars1" animationAttribute="opacity" dawnOffset="16s" dawnValue="0" duskOffset="2s"
+          duskValue="0.9" horDawnDuskAnimation />
+        <circle [attr.r]="this.diagonal" cx="0" [attr.cy]="this.height" fill="url(#bright-stars-2)" opacity="0"
+          animationId="brightStars2" animationAttribute="opacity" dawnOffset="16s" dawnValue="0" duskOffset="2s"
+          duskValue="1" horDawnDuskAnimation />
         <animateTransform attributeName="transform" attributeType="XML" type="rotate" [attr.from]="[0, 0, this.height]"
           [attr.to]="[360, 0, this.height]" dur="120s" repeatCount="indefinite" />
       </g>
-      <g id="sun">
-        <ellipse cx="0" cy="0" rx="500" ry="300" fill="url(#corona-gradient)" opacity="0">
-          <animate id="coronaOpacity" attributeType="XML" attributeName="opacity" values="0;1;0"
-            begin="-6s; coronaOpacity.end + 28s" dur="12s" fill="freeze" />
-        </ellipse>
+      <g id="sun" dailyOffset="-36s" horCelestialBodiesAnimation>
+        <ellipse cx="0" cy="0" rx="500" ry="300" fill="url(#corona-gradient)" opacity="0" animationId="coronaOpacity"
+          animationAttribute="opacity" dailyOffset="-6s" dailyValues="0;1;0" horDailyAnimation />
         <circle r="10" fill="url(#sun-gradient)" />
-        <animateMotion begin="-36s" dur="40s" repeatCount="indefinite"
-          path="M-800,400 V300 C-800 -50, 800 -50, 800 300 V400" />
       </g>
-      <g id="moon">
+      <g id="moon" dailyOffset="-16s" horCelestialBodiesAnimation>
+        <circle r="50" fill="url(#moon-shadow-gradient)" />
         <circle r="400" fill="url(#moon-gradient)" />
         <circle r="9" fill="#f5f3ce" />
-        <animateMotion begin="-16s" dur="40s" repeatCount="indefinite"
-          path="M-800,400 V300 C-800 -50, 800 -50, 800 300 V400" />
       </g>
       <g id="contourLines">
-        <polygon [attr.points]="this.contourLinePointsBack">
-          <animate id="backLineDusk" attributeType="XML" attributeName="fill" values="#78c4cd;#292a4b"
-            begin="0s; backLineDawn.end + 16s" dur="4s" fill="freeze" />
-          <animate id="backLineDawn" attributeType="XML" attributeName="fill" values="#292a4b;#78c4cd"
-            begin="backLineDusk.end + 16s" dur="4s" fill="freeze" />
+        <polygon [attr.points]="this.contourLinePointsBack" animationId="backLine" animationAttribute="fill"
+          dawnOffset="20s" dawnValue="#78c4cd" duskOffset="0s" duskValue="#292a4b" horDawnDuskAnimation>
           <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0,100"
             [attr.to]="[-this.contourLineBodyLength, 100]" dur="720s" repeatCount="indefinite" />
         </polygon>
-        <polygon [attr.points]="this.contourLinePointsMiddle">
-          <animate id="middleLineDusk" attributeType="XML" attributeName="fill" values="#4fa97c;#1e1f42"
-            begin="0s; middleLineDawn.end + 16s" dur="4s" fill="freeze" />
-          <animate id="middleLineDawn" attributeType="XML" attributeName="fill" values="#1e1f42;#4fa97c"
-            begin="middleLineDusk.end + 16s" dur="4s" fill="freeze" />
+        <polygon [attr.points]="this.contourLinePointsMiddle" animationId="middleLine" animationAttribute="fill"
+          dawnOffset="20s" dawnValue="#4fa97c" duskOffset="0s" duskValue="#1e1f42" horDawnDuskAnimation>
           <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0,160"
             [attr.to]="[-this.contourLineBodyLength, 160]" dur="120s" repeatCount="indefinite" />
         </polygon>
-        <polygon [attr.points]="this.contourLinePointsFront">
-          <animate id="frontLineDusk" attributeType="XML" attributeName="fill" values="#319540;#0a0c32"
-            begin="0s; frontLineDawn.end + 16s" dur="4s" fill="freeze" />
-          <animate id="frontLineDawn" attributeType="XML" attributeName="fill" values="#0a0c32;#319540"
-            begin="frontLineDusk.end + 16s" dur="4s" fill="freeze" />
+        <polygon [attr.points]="this.contourLinePointsFront" animationId="frontLine" animationAttribute="fill"
+          dawnOffset="20s" dawnValue="#319540" duskOffset="0s" duskValue="#0a0c32" horDawnDuskAnimation>
           <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0,220"
             [attr.to]="[-this.contourLineBodyLength, 220]" dur="20s" repeatCount="indefinite" />
         </polygon>
@@ -123,12 +94,9 @@
       patternUnits="userSpaceOnUse">
       <rect [attr.width]="this.width" [attr.height]="this.height" fill="url(#scene)"
         style="filter: url(#displacementFilter)" transform="translate(-24, 410) scale(1.05, -0.2)" />
-      <rect [attr.width]="this.width" [attr.height]="this.height" opacity="0.6" fill="#0077be">
-        <animate id="waterDusk" attributeType="XML" attributeName="fill" values="#0077be;#05061a"
-          begin="0s;waterDawn.end + 16s" dur="4s" fill="freeze" />
-        <animate id="waterDawn" attributeType="XML" attributeName="fill" values="#05061a;#0077be"
-          begin="waterDusk.end + 16s" dur="4s" fill="freeze" />
-      </rect>
+      <rect [attr.width]="this.width" [attr.height]="this.height" opacity="0.6" fill="#0077be" animationId="water"
+        animationAttribute="fill" dawnOffset="20s" dawnValue="#0077be" duskOffset="0s" duskValue="#05061a"
+        horDawnDuskAnimation />
     </pattern>
   </defs>
   <rect id="skyAndLand" [attr.width]="this.width" [attr.height]="this.height - 59" fill="url(#scene)" />
