@@ -1,0 +1,11 @@
+svg {
+    & > g {
+        & > polygon {
+            stroke-width: 0;
+            fill-rule: evenodd;
+        }
+    }
+    & > rect {
+        stroke-width: 0;
+    }
+}
