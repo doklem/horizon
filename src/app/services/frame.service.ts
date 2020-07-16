@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-import { Frame } from '../models/frame';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FrameService {
 
-  private readonly framesSubject: Subject<Array<Frame>>;
+  private readonly framesSubject: Subject<string>;
   private readonly worker: Worker;
 
-  public readonly frames$: Observable<Array<Frame>>;
+  public readonly frames$: Observable<string>;
 
   constructor() {
     this.framesSubject = new Subject();
     this.frames$ = this.framesSubject.asObservable().pipe(shareReplay(1));
     this.worker = new Worker('../webworkers/frame.worker', { type: 'module' });
-    this.worker.onmessage = ({ data }) => this.onFrameBatch(data);
+    this.worker.onmessage = ({ data }) => this.onNewContourLine(data);
   }
 
-  public generateFrameBatch(amount: number): void {
-    this.worker.postMessage(amount);
+  public generateContourLine(stretching: number): void {
+    this.worker.postMessage(stretching);
   }
 
-  private onFrameBatch(data: any) {
+  private onNewContourLine(data: any) {
     this.framesSubject.next(data);
   }
 }
