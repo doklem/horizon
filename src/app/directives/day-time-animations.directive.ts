@@ -7,9 +7,9 @@ import { DayTimeAnimationModel } from '../models/day-time-animation-model';
 })
 export class DayTimeAnimationsDirective implements OnInit {
 
-  protected static readonly SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+  private static readonly SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
 
-  protected static readonly SUN_CYCLE_RATIO = environment.sunCycleInSeconds / new Date('1970-01-02T00:00Z').valueOf();
+  private static readonly SUN_CYCLE_RATIO = environment.sunCycleInSeconds / new Date('1970-01-02T00:00Z').valueOf();
 
   @Input()
   public appDayTimeAnimations: Array<DayTimeAnimationModel>;
@@ -19,7 +19,7 @@ export class DayTimeAnimationsDirective implements OnInit {
     private readonly renderer: Renderer2) {
   }
 
-  protected static convertToSeconds(dayTime: string): number {
+  private static convertToSeconds(dayTime: string): number {
     return new Date(`1970-01-01T${dayTime}Z`).valueOf() * DayTimeAnimationsDirective.SUN_CYCLE_RATIO;
   }
 
@@ -28,6 +28,7 @@ export class DayTimeAnimationsDirective implements OnInit {
     if (elementId === undefined || elementId === null || elementId.trim().length < 1) {
       throw new Error(`Please specify an ID for the animation's parent!`);
     }
+    this.setInitialValues();
     this.appDayTimeAnimations.forEach((model, index) => this.addAnimation(model, `${elementId}_${index}`));
   }
 
@@ -51,6 +52,24 @@ export class DayTimeAnimationsDirective implements OnInit {
 
     // Append the animation.
     this.renderer.appendChild(this.element.nativeElement, animation);
+  }
 
+  private setInitialValues(): void {
+    // Get a distinct list of all attribute names.
+    const initialValuePerAttributes = {};
+    this.appDayTimeAnimations.map(model => initialValuePerAttributes[model.attribute] = null);
+
+    // Determin the first value for each attribute
+    for (const attribute in initialValuePerAttributes) {
+      if (initialValuePerAttributes.hasOwnProperty(attribute)) {
+        initialValuePerAttributes[attribute] = this.appDayTimeAnimations
+          .filter(model => model.attribute === attribute)
+          .sort((modelA, modelB) => modelA.dayTime.localeCompare(modelB.dayTime))[0].values
+          .split(';')[0];
+
+        // Set the attribute value on the element.
+        this.renderer.setAttribute(this.element.nativeElement, attribute, initialValuePerAttributes[attribute]);
+      }
+    }
   }
 }
