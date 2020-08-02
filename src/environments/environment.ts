@@ -11,18 +11,13 @@ export const environment = {
       new DayTimeAnimationModel('stop-color', '15:00', '03:00', '#ffffff;#fff4c5;#b291a7;#62647c')
     ],
     cloudLeft: [
-      new DayTimeAnimationModel('cx', '04:30', '12:00', '0;0.1;0.5;0.9;1', false),
-      new DayTimeAnimationModel('cx', '16:30', '12:00', '0;0.1;0.5;0.9;1', false),
-      new DayTimeAnimationModel('cy', '06:00', '12:00', '1;0;1', false),
-      new DayTimeAnimationModel('cy', '18:00', '12:00', '1;0;1', false),
-      new DayTimeAnimationModel('r', '04:30', '12:00', '0;2;0'),
-      new DayTimeAnimationModel('r', '16:30', '12:00', '0;2;0')
+      new DayTimeAnimationModel('cx', '04:30', '12:00', '0;0.1;0.5;0.9;1', false, false),
+      new DayTimeAnimationModel('cy', '06:00', '12:00', '1;0;1', false, false),
+      new DayTimeAnimationModel('r', '04:30', '12:00', '0;2;0', true, false)
     ],
     cloudRight: [
-      new DayTimeAnimationModel('cy', '06:00', '12:00', '1;0;1', false),
-      new DayTimeAnimationModel('cy', '18:00', '12:00', '1;0;1', false),
-      new DayTimeAnimationModel('r', '04:30', '12:00', '0;2;0'),
-      new DayTimeAnimationModel('r', '16:30', '12:00', '0;2;0')
+      new DayTimeAnimationModel('cy', '06:00', '12:00', '1;0;1', false, false),
+      new DayTimeAnimationModel('r', '04:30', '12:00', '0;2;0', true, false)
     ],
     cloudRime: [
       new DayTimeAnimationModel('stop-color', '06:00', '03:00', '#3b3d5b;#cccccc'),

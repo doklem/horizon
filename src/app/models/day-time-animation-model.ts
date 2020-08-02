@@ -4,6 +4,7 @@ export class DayTimeAnimationModel {
         public readonly dayTime: string,
         public readonly duration: string,
         public readonly values: string,
-        public readonly freeze = true) {
+        public readonly freeze = true,
+        public readonly onceADay = true) {
     }
 }

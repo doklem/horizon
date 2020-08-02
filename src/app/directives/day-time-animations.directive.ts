@@ -37,11 +37,23 @@ export class DayTimeAnimationsDirective implements OnInit {
     const animation: SVGAnimateElement = this.renderer.createElement('animate', DayTimeAnimationsDirective.SVG_NAMESPACE);
     animation.id = animationId;
     const durationInSeconds = DayTimeAnimationsDirective.convertToSeconds(model.duration);
-    const delayInSeconds = environment.sunCycleInSeconds - durationInSeconds;
-    this.renderer.setAttribute(
-      animation,
-      'begin',
-      `${DayTimeAnimationsDirective.convertToSeconds(model.dayTime)}s; ${animation.id}.end + ${delayInSeconds}s`);
+    if (model.onceADay) {
+      const delayInSeconds = environment.sunCycleInSeconds - durationInSeconds;
+      if (delayInSeconds < 0) {
+        throw new Error(
+          `The duration '${model.duration}' of the animation with the Id '${animationId}' is too long! It should be within 24h.`);
+      }
+      this.renderer.setAttribute(
+        animation,
+        'begin',
+        `${DayTimeAnimationsDirective.convertToSeconds(model.dayTime)}s; ${animation.id}.end + ${delayInSeconds}s`);
+    } else {
+      this.renderer.setAttribute(
+        animation,
+        'begin',
+        `${DayTimeAnimationsDirective.convertToSeconds(model.dayTime)}s`);
+      this.renderer.setAttribute(animation, 'repeatCount', 'indefinite');
+    }
     this.renderer.setAttribute(animation, 'values', model.values);
     this.renderer.setAttribute(animation, 'attributeName', model.attribute);
     this.renderer.setAttribute(animation, 'dur', `${durationInSeconds}s`);
