@@ -1,4 +1,5 @@
 import { IAnimationConfig } from '../interfaces/ianimation-config';
+import { ContourLineModel } from './contour-line-model';
 
 export class AppComponentModel {
     public animations: IAnimationConfig;
@@ -7,16 +8,10 @@ export class AppComponentModel {
     public celestialBodiesX: number;
     public contourLineAmplitude: number;
     public contourLineBodyLength: number;
-    public contourLineCycleDurationFront: string;
-    public contourLineCycleDurationBack: string;
-    public contourLineCycleDurationMiddle: string;
+    public contourLineBack: ContourLineModel;
+    public contourLineFront: ContourLineModel;
+    public contourLineMiddle: ContourLineModel;
     public contourLineGap: number;
-    public contourLineHeightBack: number;
-    public contourLineHeightFront: number;
-    public contourLineHeightMiddle: number;
-    public contourLinePointsBack: string;
-    public contourLinePointsFront: string;
-    public contourLinePointsMiddle: string;
     public contourLineSpeedOffset: number;
     public diagonal: number;
     public faintStars1PatternSize: number;

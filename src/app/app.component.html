@@ -133,26 +133,26 @@
         </ellipse>
       </g>
       <g id="contourLines">
-        <polygon id="contourLineBack" [attr.points]="this.model.contourLinePointsBack"
+        <polygon id="contourLineBack" [attr.points]="this.model.contourLineBack.points"
           [appDayTimeAnimations]="this.model.animations.contourLineBack">
           <animateTransform attributeName="transform" attributeType="XML" type="translate"
-            [attr.from]="[0, this.model.contourLineHeightBack]"
-            [attr.to]="[-this.model.contourLineBodyLength, this.model.contourLineHeightBack]"
-            [attr.dur]="this.model.contourLineCycleDurationBack" repeatCount="indefinite" />
+            [attr.from]="[0, this.model.contourLineBack.height]"
+            [attr.to]="[-this.model.contourLineBodyLength, this.model.contourLineBack.height]"
+            [attr.dur]="this.model.contourLineBack.cycleDuration" repeatCount="indefinite" />
         </polygon>
-        <polygon id="contourLineMiddle" [attr.points]="this.model.contourLinePointsMiddle"
+        <polygon id="contourLineMiddle" [attr.points]="this.model.contourLineMiddle.points"
           [appDayTimeAnimations]="this.model.animations.contourLineMiddle">
           <animateTransform attributeName="transform" attributeType="XML" type="translate"
-            [attr.from]="[0, this.model.contourLineHeightMiddle]"
-            [attr.to]="[-this.model.contourLineBodyLength, this.model.contourLineHeightMiddle]"
-            [attr.dur]="this.model.contourLineCycleDurationMiddle" repeatCount="indefinite" />
+            [attr.from]="[0, this.model.contourLineMiddle.height]"
+            [attr.to]="[-this.model.contourLineBodyLength, this.model.contourLineMiddle.height]"
+            [attr.dur]="this.model.contourLineMiddle.cycleDuration" repeatCount="indefinite" />
         </polygon>
-        <polygon id="contourLineFront" [attr.points]="this.model.contourLinePointsFront"
+        <polygon id="contourLineFront" [attr.points]="this.model.contourLineFront.points"
           [appDayTimeAnimations]="this.model.animations.contourLineFront">
           <animateTransform attributeName="transform" attributeType="XML" type="translate"
-            [attr.from]="[0, this.model.contourLineHeightFront]"
-            [attr.to]="[-this.model.contourLineBodyLength, this.model.contourLineHeightFront]"
-            [attr.dur]="this.model.contourLineCycleDurationFront" repeatCount="indefinite" />
+            [attr.from]="[0, this.model.contourLineFront.height]"
+            [attr.to]="[-this.model.contourLineBodyLength, this.model.contourLineFront.height]"
+            [attr.dur]="this.model.contourLineFront.cycleDuration" repeatCount="indefinite" />
         </polygon>
       </g>
     </pattern>
