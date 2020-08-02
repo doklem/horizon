@@ -2,14 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { DawnDuskAnimationDirective } from './directives/dawn-dusk-animation.directive';
-import { DailyAnimationDirective } from './directives/daily-animation.directive';
+import { DayTimeAnimationsDirective } from './directives/day-time-animations.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DailyAnimationDirective,
-    DawnDuskAnimationDirective
+    DayTimeAnimationsDirective
   ],
   imports: [
     BrowserModule
