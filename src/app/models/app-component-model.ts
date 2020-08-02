@@ -4,6 +4,7 @@ export class AppComponentModel {
     public animations: IAnimationConfig;
     public brightStars1PatternSize: number;
     public brightStars2PatternSize: number;
+    public celestialBodiesX: number;
     public contourLineAmplitude: number;
     public contourLineBodyLength: number;
     public contourLineCycleDurationFront: string;

@@ -2,6 +2,14 @@ import { DayTimeAnimationModel } from 'src/app/models/day-time-animation-model';
 
 export const environment = {
   animations: {
+    cloudCore: [
+      new DayTimeAnimationModel('stop-color', '06:00', '03:00', '#62647c;#ffffff'),
+      new DayTimeAnimationModel('stop-color', '15:00', '03:00', '#ffffff;#fff4c5;#b291a7;#62647c')
+    ],
+    cloudRime: [
+      new DayTimeAnimationModel('stop-color', '06:00', '03:00', '#3b3d5b;#cccccc'),
+      new DayTimeAnimationModel('stop-color', '15:00', '03:00', '#cccccc;#ffe373;#875275;#3b3d5b')
+    ],
     contourLineBack: [
       new DayTimeAnimationModel('fill', '06:00', '03:00', '#292a4b;#78c4cd'),
       new DayTimeAnimationModel('fill', '15:00', '03:00', '#78c4cd;#292a4b')

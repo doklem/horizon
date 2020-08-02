@@ -6,6 +6,28 @@ import { DayTimeAnimationModel } from 'src/app/models/day-time-animation-model';
 
 export const environment = {
   animations: {
+    cloudCore: [
+      new DayTimeAnimationModel('stop-color', '06:00', '03:00', '#62647c;#ffffff'),
+      new DayTimeAnimationModel('stop-color', '15:00', '03:00', '#ffffff;#fff4c5;#b291a7;#62647c')
+    ],
+    cloudLeft: [
+      new DayTimeAnimationModel('cx', '04:30', '12:00', '0;0.1;0.5;0.9;1', false),
+      new DayTimeAnimationModel('cx', '16:30', '12:00', '0;0.1;0.5;0.9;1', false),
+      new DayTimeAnimationModel('cy', '06:00', '12:00', '1;0;1', false),
+      new DayTimeAnimationModel('cy', '18:00', '12:00', '1;0;1', false),
+      new DayTimeAnimationModel('r', '04:30', '12:00', '0;2;0'),
+      new DayTimeAnimationModel('r', '16:30', '12:00', '0;2;0')
+    ],
+    cloudRight: [
+      new DayTimeAnimationModel('cy', '06:00', '12:00', '1;0;1', false),
+      new DayTimeAnimationModel('cy', '18:00', '12:00', '1;0;1', false),
+      new DayTimeAnimationModel('r', '04:30', '12:00', '0;2;0'),
+      new DayTimeAnimationModel('r', '16:30', '12:00', '0;2;0')
+    ],
+    cloudRime: [
+      new DayTimeAnimationModel('stop-color', '06:00', '03:00', '#3b3d5b;#cccccc'),
+      new DayTimeAnimationModel('stop-color', '15:00', '03:00', '#cccccc;#ffe373;#875275;#3b3d5b')
+    ],
     contourLineBack: [
       new DayTimeAnimationModel('fill', '06:00', '03:00', '#292a4b;#78c4cd'),
       new DayTimeAnimationModel('fill', '15:00', '03:00', '#78c4cd;#292a4b')
@@ -42,7 +64,7 @@ export const environment = {
   production: false,
   renderHeight: 1080,
   renderWidth: 1920,
-  sunCycleInSeconds: 20
+  sunCycleInSeconds: 40
 };
 
 /*

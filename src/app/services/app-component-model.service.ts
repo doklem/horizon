@@ -22,8 +22,9 @@ export class AppComponentModelService {
     this.model.width = environment.renderWidth;
     this.model.height = environment.renderHeight;
     const speed = environment.contourLineSpeed;
+    this.model.celestialBodiesX = this.model.width * 0.25;
     this.model.contourLineSpeedOffset = 5;
-    this.model.diagonal = Math.hypot(this.model.width * 0.5, this.model.height);
+    this.model.diagonal = Math.hypot(this.model.width, this.model.height);
     this.model.contourLineAmplitude = this.model.height * 0.125;
     this.model.contourLineBodyLength = this.model.width * 3;
     this.model.sunCycleDuration = `${environment.sunCycleInSeconds}s`;

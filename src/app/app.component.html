@@ -28,6 +28,14 @@
       <circle fill="white" [attr.cx]="this.model.brightStars2PatternSize * 0.59"
         [attr.cy]="this.model.brightStars2PatternSize * 0.53" [attr.r]="this.model.starRadius" />
     </pattern>
+    <radialGradient id="cloud-left-gradient" [appDayTimeAnimations]="this.model.animations.cloudLeft">
+      <stop id="cloud-left-core" offset="0%" [appDayTimeAnimations]="this.model.animations.cloudCore" />
+      <stop id="cloud-left-rime" offset="100%" [appDayTimeAnimations]="this.model.animations.cloudRime" />
+    </radialGradient>
+    <radialGradient id="cloud-right-gradient" cx="0" [appDayTimeAnimations]="this.model.animations.cloudRight">
+      <stop id="cloud-right-core" offset="0%" [appDayTimeAnimations]="this.model.animations.cloudCore" />
+      <stop id="cloud-right-rime" offset="100%" [appDayTimeAnimations]="this.model.animations.cloudRime" />
+    </radialGradient>
     <radialGradient id="sun-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
       <stop id="sun-gradient-stop-0" offset="70%" stop-opacity="1" [appDayTimeAnimations]="this.model.animations.sun" />
       <stop id="sun-gradient-stop-1" offset="100%" stop-opacity="0"
@@ -52,7 +60,7 @@
       <rect id="sky" [attr.width]="this.model.width" [attr.height]="this.model.height"
         [appDayTimeAnimations]="this.model.animations.sky" />
       <g id="celestialBodies">
-        <g id="stars" [attr.transform]="'translate(' + (this.model.width * 0.5) + ', 0)'"
+        <g id="stars" [attr.transform]="'translate(' + this.model.celestialBodiesX + ', 0)'"
           [appDayTimeAnimations]="this.model.animations.stars">
           <circle [attr.r]="this.model.diagonal" cx="0" [attr.cy]="this.model.height" fill="url(#faint-stars-1)"
             opacity="0.4" />
@@ -63,19 +71,66 @@
           <circle [attr.r]="this.model.diagonal" cx="0" [attr.cy]="this.model.height" fill="url(#bright-stars-2)"
             opacity="1" />
         </g>
-        <g id="sun" [attr.transform]="'translate(' + (this.model.width * 0.5) + ', ' + this.model.height * 2.0 + ')'">
+        <g id="sun"
+          [attr.transform]="'translate(' + this.model.celestialBodiesX + ', ' + this.model.height * 2.0 + ')'">
           <circle [attr.r]="this.model.sunRadius * 40" fill="url(#corona-gradient)" />
           <circle [attr.r]="this.model.sunRadius" fill="url(#sun-gradient)" />
         </g>
-        <g id="moon" [attr.transform]="'translate(' + (this.model.width * 0.5) + ', 0)'">
+        <g id="moon" [attr.transform]="'translate(' + this.model.celestialBodiesX + ', 0)'">
           <circle [attr.r]="this.model.moonRadius * 5" fill="url(#moon-shadow-gradient)" />
           <circle [attr.r]="this.model.moonRadius * 40" fill="url(#moon-gradient)" />
           <circle [attr.r]="this.model.moonRadius" fill="#f5f3ce" />
         </g>
         <animateTransform attributeName="transform" attributeType="XML" type="rotate"
-          [attr.from]="[0, this.model.width * 0.5, this.model.height]"
-          [attr.to]="[360, this.model.width * 0.5, this.model.height]" [attr.dur]="this.model.sunCycleDuration"
+          [attr.from]="[0, this.model.celestialBodiesX, this.model.height]"
+          [attr.to]="[360, this.model.celestialBodiesX, this.model.height]" [attr.dur]="this.model.sunCycleDuration"
           repeatCount="indefinite" />
+      </g>
+      <g id="clouds" style="filter: url(#cloudFilter)">
+        <g>
+          <ellipse rx="50" ry="100" cx="270" cy="180" fill="url(#cloud-left-gradient)">
+            <animate attributeType="XML" attributeName="rx" values="30;70;30" dur="17s" repeatCount="indefinite" />
+            <animate attributeType="XML" attributeName="ry" values="80;120;80" dur="19s" repeatCount="indefinite" />
+          </ellipse>
+          <ellipse rx="150" ry="100" cx="225" cy="250" fill="url(#cloud-left-gradient)">
+            <animate attributeType="XML" attributeName="rx" values="130;170;130" dur="23s" repeatCount="indefinite" />
+            <animate attributeType="XML" attributeName="ry" values="80;120;80" dur="29s" repeatCount="indefinite" />
+          </ellipse>
+          <ellipse rx="200" ry="50" cx="200" cy="300" fill="url(#cloud-left-gradient)">
+            <animate attributeType="XML" attributeName="rx" values="180;220;180" dur="31s" repeatCount="indefinite" />
+            <animate attributeType="XML" attributeName="ry" values="30;70;30" dur="37s" repeatCount="indefinite" />
+          </ellipse>
+        </g>
+        <ellipse rx="50" ry="30" cx="500" cy="300" fill="url(#cloud-left-gradient)">
+          <animate attributeType="XML" attributeName="rx" values="40;60;40" dur="31s" repeatCount="indefinite" />
+          <animate attributeType="XML" attributeName="ry" values="20;40;20" dur="37s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse rx="100" ry="75" cx="700" cy="150" fill="url(#cloud-left-gradient)">
+          <animate attributeType="XML" attributeName="rx" values="80;120;80" dur="23s" repeatCount="indefinite" />
+          <animate attributeType="XML" attributeName="ry" values="55;95;55" dur="29s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse rx="150" ry="100" cx="900" cy="350" fill="url(#cloud-left-gradient)">
+          <animate attributeType="XML" attributeName="rx" values="130;170;130" dur="23s" repeatCount="indefinite" />
+          <animate attributeType="XML" attributeName="ry" values="80;120;80" dur="29s" repeatCount="indefinite" />
+        </ellipse>
+        <g>
+          <ellipse rx="50" ry="100" cx="1550" cy="230" fill="url(#cloud-right-gradient)">
+            <animate attributeType="XML" attributeName="rx" values="30;70;30" dur="17s" repeatCount="indefinite" />
+            <animate attributeType="XML" attributeName="ry" values="80;120;80" dur="19s" repeatCount="indefinite" />
+          </ellipse>
+          <ellipse rx="150" ry="100" cx="1625" cy="300" fill="url(#cloud-right-gradient)">
+            <animate attributeType="XML" attributeName="rx" values="130;170;130" dur="23s" repeatCount="indefinite" />
+            <animate attributeType="XML" attributeName="ry" values="80;120;80" dur="29s" repeatCount="indefinite" />
+          </ellipse>
+          <ellipse rx="200" ry="50" cx="1600" cy="350" fill="url(#cloud-right-gradient)">
+            <animate attributeType="XML" attributeName="rx" values="180;220;180" dur="31s" repeatCount="indefinite" />
+            <animate attributeType="XML" attributeName="ry" values="30;70;30" dur="37s" repeatCount="indefinite" />
+          </ellipse>
+        </g>
+        <ellipse rx="120" ry="100" cx="1800" cy="50" fill="url(#cloud-right-gradient)">
+          <animate attributeType="XML" attributeName="rx" values="100;140;100" dur="23s" repeatCount="indefinite" />
+          <animate attributeType="XML" attributeName="ry" values="80;120;80" dur="29s" repeatCount="indefinite" />
+        </ellipse>
       </g>
       <g id="contourLines">
         <polygon id="contourLineBack" [attr.points]="this.model.contourLinePointsBack"
@@ -101,7 +156,13 @@
         </polygon>
       </g>
     </pattern>
-    <filter id="displacementFilter">
+    <filter id="cloudFilter">
+      <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="1" result="turbulence" seed="1" />
+      <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="60" xChannelSelector="R" yChannelSelector="G"
+        result="displacement" />
+      <feGaussianBlur in="displacement" stdDeviation="4" />
+    </filter>
+    <filter id="waterFilter">
       <feTurbulence type="turbulence" baseFrequency="0.2" numOctaves="2" result="turbulence" seed="1">
         <animate attributeType="XML" attributeName="seed" values="0;30" begin="0s;" dur="1s" repeatCount="indefinite" />
       </feTurbulence>
@@ -112,7 +173,7 @@
     <pattern id="sceneMirror" x="0" y="0" [attr.width]="this.model.width" [attr.height]="this.model.height"
       patternUnits="userSpaceOnUse">
       <rect [attr.width]="this.model.width" [attr.height]="this.model.height" fill="url(#scene)"
-        style="filter: url(#displacementFilter)"
+        style="filter: url(#waterFilter)"
         [attr.transform]="'translate(-' + (this.model.width * 0.03) + ', ' + (this.model.height * 1.025) + ') scale(1.05, -0.2)'" />
       <rect id="water-albedo" [attr.width]="this.model.width" [attr.height]="this.model.height" opacity="0.6"
         [appDayTimeAnimations]="this.model.animations.waterAlbedo" />
